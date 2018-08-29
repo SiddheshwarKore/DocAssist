@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DocAssist
-{
+{   //Traveses through the entire project directory and returns the list of XAMl paths and add to each Model object
     class GetFilesinPath
     {
         List<Model> lstModel = new List<Model>();
