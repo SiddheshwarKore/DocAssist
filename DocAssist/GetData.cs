@@ -8,8 +8,10 @@ using System.Xml.Linq;
 
 namespace DocAssist
 {
+ //Gets Data from all the XAML files in the form of datatables and passes it Create Document Class for further processing
     class GetData
     {
+        //Declaring CML namespaces required for interpretation
         XNamespace x = "http://schemas.microsoft.com/winfx/2006/xaml";
         XNamespace nonamespace = "http://schemas.microsoft.com/netfx/2009/xaml/activities";
         XNamespace sap2010 = "http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation";
@@ -18,9 +20,10 @@ namespace DocAssist
         public IList<Model> GetDataForXaml(List<Model> lstModel)
         {
             List<Model> lstReponseModel = new List<Model>();
-            
+            //For each XAML file
             foreach (var obj in lstModel)
             {
+                //Create instance of Xdoc for corresponding XAML
                 XDocument doc = XDocument.Load(obj.XamlPath);
                 Model oResponse = new Model();
                 oResponse.XamlPath = obj.XamlPath;
@@ -45,7 +48,7 @@ namespace DocAssist
 
             return lstReponseModel;
         }
-
+        //Remove duplicate rows from List of applications Datatble. Because many xaml files may be working on same application which can create duplicacy  
         public DataTable GetAppsDetails(List<Model> lstModel)
         {
             
@@ -56,14 +59,12 @@ namespace DocAssist
                         dtAppTableFinal.Rows.Add(dr.ItemArray);
                 }
             }
-            // Console.WriteLine("before  "+dtAppTableFinal.Rows.Count.ToString()+" "+ dtAppTableFinal.Columns.Count.ToString());
-            //dtAppTableFinal.CaseSensitive = false;
+           
             dtAppTableFinal = dtAppTableFinal.DefaultView.ToTable("new",true,"Type of Application", "URL\\End Point");
          
-           // Console.WriteLine("after "+dtAppTableFinal.Rows.Count.ToString() + " " + dtAppTableFinal.Columns.Count.ToString());
             return dtAppTableFinal;
         }
-
+        // Enlist all applications used in the projects including web services
         private Model GetListOfApps(Model oModel, XDocument doc)
         {
             //oModel.dtAppTable.Columns.Add("Sr No.", typeof(int));
@@ -132,7 +133,7 @@ namespace DocAssist
 
         private Model GetVariablesData(Model oModel, XDocument doc)
         {
-            // Execute your code for getting annotation info
+            // Execute your code for getting variables info
             
             var properties = doc.Descendants(nonamespace + "Variable");
             DataTable dt = new DataTable();
@@ -150,7 +151,7 @@ namespace DocAssist
 
         private Model GetLogData(Model oModel,XDocument doc )
         {
-            // Execute your code for getting annotation info
+            // Execute your code for getting logging info
             var properties = doc.Descendants(ui + "LogMessage");
             DataTable dt = new DataTable();
             dt.Columns.Add("Sr No.", typeof(int));
@@ -168,7 +169,7 @@ namespace DocAssist
 
         private Model GetArguements(Model oModel, XDocument doc)
         {
-            // Execute your code for getting annotation info
+            // Execute your code for getting arguments info
             var properties = doc.Descendants(x + "Property");
             DataTable dt = new DataTable();
             dt.Columns.Add("Sr No.", typeof(int));
