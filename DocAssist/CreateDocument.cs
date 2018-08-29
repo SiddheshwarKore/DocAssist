@@ -9,6 +9,7 @@ using System.Data;
 
 namespace DocAssist
 {
+    //This class and its GetDocument method is similar to main method in any program. It calls all other classes and their attributes/members
     public class CreateDocument : CodeActivity
     {
         [Category("Input")]
@@ -33,6 +34,8 @@ namespace DocAssist
             //Add method to get data filled in each instance of Model
             GetData oGetData = new GetData();
             lstModel = oGetData.GetDataForXaml(lstModel).ToList();
+            
+            //Gets Application details for Project
             dtAppDetail= oGetData.GetAppsDetails(lstModel);
 
             //Add method to write data to output
