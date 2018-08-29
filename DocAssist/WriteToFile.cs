@@ -11,7 +11,7 @@ namespace DocAssist
 {
     class WriteToFile
     {
-
+        //Creates instance of word doc and writes content in it
         public Boolean WriteDataToFile(IList<Model> lstModel, string solutionPath, System.Data.DataTable dtAppDetails)
         {
             //Create instance of word document
@@ -28,12 +28,12 @@ namespace DocAssist
                 Range: tocRange,
                 UseHeadingStyles: true);
             //toc.Update();
-
+            //Add title paragraph
             var tocTitleRange = document.Range(0, 0);
             tocTitleRange.Text = "Table of Contents :";
             tocTitleRange.InsertParagraphAfter();
             tocTitleRange.set_Style("Title");
-
+            //Add other details of Application Table
             Section sec = document.Content.Sections.Add();
             Paragraph paraApp1 = document.Content.Paragraphs.Add(ref missing);
             paraApp1.Range.Select();
@@ -65,7 +65,7 @@ namespace DocAssist
             return true;
         }
         /// <summary>
-        ///  Input : Word document instance
+        ///  Input : Word document instance, Model object and Reflections . Writes Table in word Document 
         /// </summary>
        
 
@@ -125,7 +125,7 @@ namespace DocAssist
 
             }
         }
-
+        //For given Datatble, cretaes a word table
         private void WriteData(System.Data.DataTable dt, Document document, object missing, Paragraph para1)
         {
             int RowCount = dt.Rows.Count;
