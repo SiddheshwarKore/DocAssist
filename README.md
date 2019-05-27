@@ -14,7 +14,6 @@ With Doc Assist you can export the entire project to a document with just a sing
 5.	Screenshots of each workflow at module level
 If you modify the code, just redo the same and find the updated document in  single click.
 
-
 2.	How to use?
 
 1.	Use package ActivitiesDoAssist from Git Repository contained on the main folder. 
@@ -33,7 +32,6 @@ Solution mainly consists of five modules as below
 a.	string XamlPath : filepath of each module
 b.	IList<DataTable> LstdataTables : List of Datatbles containing modulewise details of various components
 c.	DataTable dtAppTable: Project level table contacting list of applications used
-
 2.	Main.cs : Acts as main class and method which call all other modules along with Execute Method
 3.	GetFilesinPath.cs : Takes Solution Path as input and traverses through each subdirectory and file within the input directory, loos for XAML files and adds it to a collection 
 4.	GetData.cs Interprets each XAML file and retrieves the following data tables
